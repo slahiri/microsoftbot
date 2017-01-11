@@ -1,0 +1,22 @@
+{
+  "name": "emptybot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "botbuilder": "^3.4.2",
+    "botbuilder-azure": "0.0.1",
+    "express": "^4.14.0",
+    "request": "^2.79.0",
+    "restify": "^4.3.0",
+    "watson-developer-cloud": "^2.14.3"
+  },
+  "devDependencies": {
+      "restify": "^4.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
