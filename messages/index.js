@@ -12,6 +12,8 @@ var logger = new (winston.Logger)({
     ]
   });
 
+logger.log('info', 'check if file is working or not');
+
 var useEmulator = (process.env.NODE_ENV == 'development');
 
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
