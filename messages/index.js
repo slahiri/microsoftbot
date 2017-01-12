@@ -89,15 +89,15 @@ bot.dialog('/',[
         {
         	logger.log('info', 'conversation api calling');
             logger.log('info',"conversion object");
-            // if(!conversation)
-            // {
-                var conversation = watson.conversation({
+            if(!conversation)
+            {
+                 conversation = watson.conversation({
                     username: 'c725ffde-2e55-4de5-9b8e-d906a5e87690',
                     password: '4pYI2ggJyeVP',
                     version_date: '2016-09-20',
                     version: 'v1'
                 });
-            // }
+            }
              logger.log('info',"conversion object data",JSON.stringify(conversation));
             
             
