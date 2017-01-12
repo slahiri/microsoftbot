@@ -107,8 +107,11 @@ bot.dialog('/',[
              //   version_date: '2016-09-20',
             //    version: 'v1'
             //});
-            session.userData.context.layout = '';
-            session.userData.context.buttons = '';
+            if(typeof session.userData.context!='undefined'){
+                session.userData.context.layout = '';
+                session.userData.context.buttons = '';    
+            }
+            
             logger.log('info', '----------conversation.message stagew----');
             logger.log('info', 'message text',session.message.text);
             conversation.message({
