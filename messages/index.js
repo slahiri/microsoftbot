@@ -88,7 +88,7 @@ bot.dialog('/',[
         }else
         {
         	logger.log('info', 'conversation api calling');
-            logger.log('info',"conversion object", JSON.stringify(conversation));
+            logger.log('info',"conversion object");
             // if(!conversation)
             // {
                 conversation = watson.conversation({
@@ -109,6 +109,7 @@ bot.dialog('/',[
             session.userData.context.layout = '';
             session.userData.context.buttons = '';
             logger.log('info', '----------conversation.message stagew----');
+            logger.log('info', 'message text',session.message.text);
             conversation.message({
                 workspace_id:workspace_id,
                 input:{'text':((typeof session.message.text!='undefined')?session.message.text:'')},
