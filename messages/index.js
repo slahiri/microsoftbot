@@ -5,10 +5,12 @@ var watson = require('watson-developer-cloud');
 var request = require('request');
 var winston = require('winston');
 
+var filename = path.join(__dirname, 'somefile.log');
+
 var logger = new (winston.Logger)({
     transports: [
       new (winston.transports.Console)(),
-      new (winston.transports.File)({ filename: 'somefile.log' })
+      new (winston.transports.File)({ filename: filename })
     ]
   });
 
