@@ -4,6 +4,7 @@ var botbuilder_azure = require("botbuilder-azure");
 var watson = require('watson-developer-cloud');
 var request = require('request');
 var winston = require('winston');
+ var path = require('path');
 
 var filename = path.join(__dirname, 'somefile.log');
 
