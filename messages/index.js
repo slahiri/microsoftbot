@@ -139,7 +139,7 @@ bot.dialog('/',[
                 {
                     console.log("layout==="+response.context.layout);
                     if(response.context.layout=='button'){
-                        session.beginDialog('/btnTemp',response);
+                        session.beginDialog('/quickreplies',response);
                     }
                     else if(response.context.layout=='quick_replies'){
                         session.beginDialog('/quickreplies',response);
