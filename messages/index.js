@@ -17,6 +17,11 @@ var logger = new (winston.Logger)({
 logger.log('info', 'check if file is working or not');
 
 var useEmulator = (process.env.NODE_ENV == 'development');
+logger.log('info', JSON.stringify(process.env));
+logger.log('info', 'appId'+process.env['MicrosoftAppId']);
+logger.log('info', 'appPassword'+process.env['MicrosoftAppPassword']);
+logger.log('info', 'stateEndpoint'+process.env['BotStateEndpoint']);
+logger.log('info', 'openIdMetadata'+process.env['BotOpenIdMetadata']);
 
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
     appId: process.env['MicrosoftAppId'],
