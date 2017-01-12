@@ -98,6 +98,7 @@ bot.dialog('/',[
                     version: 'v1'
                 });
             // }
+             logger.log('info',"conversion object data",JSON.stringify(conversation));
             
             
             //var conversation = watson.conversation({
