@@ -3,6 +3,14 @@ var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 var watson = require('watson-developer-cloud');
 var request = require('request');
+var winston = require('winston');
+
+var logger = new (winston.Logger)({
+    transports: [
+      new (winston.transports.Console)(),
+      new (winston.transports.File)({ filename: 'somefile.log' })
+    ]
+  });
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
@@ -68,6 +76,7 @@ bot.dialog('/',[
             next();
         }else
         {
+        	logger.log('info', 'conversation api calling');
             if(!conversation)
             {
                 conversation = watson.conversation({
@@ -98,6 +107,8 @@ bot.dialog('/',[
                 }
                 console.log("-----------------respose-------------");
                 console.log(response);
+                logger.log('info', '----------conversation reply----');
+                logger.log('info',SON.stringify(response, null, 2));
                 //console.log(JSON.stringify(response, null, 2));
                 //session.send(response.output.text.join('\n'));
                 response.output.text.forEach(function(ele){
