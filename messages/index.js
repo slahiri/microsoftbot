@@ -88,7 +88,7 @@ bot.dialog('/',[
         }else
         {
         	logger.log('info', 'conversation api calling');
-            logger.log('info', JSON.stringify(conversation));
+            logger.log('info',"conversion object", JSON.stringify(conversation));
             // if(!conversation)
             // {
                 conversation = watson.conversation({
