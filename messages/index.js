@@ -101,6 +101,7 @@ bot.dialog('/',[
             //});
             session.userData.context.layout = '';
             session.userData.context.buttons = '';
+            logger.log('info', '----------conversation.message stagew----');
             conversation.message({
                 workspace_id:workspace_id,
                 input:{'text':((typeof session.message.text!='undefined')?session.message.text:'')},
