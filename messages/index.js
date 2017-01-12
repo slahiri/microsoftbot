@@ -81,15 +81,16 @@ bot.dialog('/',[
         }else
         {
         	logger.log('info', 'conversation api calling');
-            if(!conversation)
-            {
+            logger.log('info', JSON.stringify(conversation));
+            // if(!conversation)
+            // {
                 conversation = watson.conversation({
                     username: 'c725ffde-2e55-4de5-9b8e-d906a5e87690',
                     password: '4pYI2ggJyeVP',
                     version_date: '2016-09-20',
                     version: 'v1'
                 });
-            }
+            // }
             
             
             //var conversation = watson.conversation({
