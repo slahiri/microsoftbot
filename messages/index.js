@@ -10,8 +10,7 @@ var filename = path.join(__dirname, 'somefile.log');
 
 var logger = new (winston.Logger)({
     transports: [
-      new (winston.transports.Console)(),
-      new (winston.transports.File)({ filename: filename })
+        new (winston.transports.File)({ filename: filename })
     ]
   });
 
