@@ -108,7 +108,7 @@ bot.dialog('/',[
             },function(err, response){
                 if(err){
                     logger.log('info', '----------conversation err reply----');
-                    logger.log('info',SON.stringify(err, null, 2));
+                    logger.log('info',JSON.stringify(err, null, 2));
                     console.log(JSON.stringify(err));
                     session.send("Hi ..cannot be started");
                 }
