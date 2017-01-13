@@ -9,7 +9,8 @@
             "program": "${workspaceRoot}/index.js",
             "cwd": "${workspaceRoot}",
             "env": {
-                "NODE_ENV": "development"
+                "NODE_ENV": "development",
+                "FB_ACCESS_TOKEN":"EAACZCubvsNZCEBABwMqOMtSHZCuoY4DvZCLw9oJFP6R1zVvH4ExfxSF0XBJbH9JSQlJRsKdM2aRMR1QexN88HzjIKdvMWrILn6ZCaESKh0kLYSwhpUBwOLp81YIcYXz87rdBry28xIstVay58GPj492t6YHW3j2hMEGaC00AEdQZDZD"
             }
         }
     ]
