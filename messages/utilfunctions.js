@@ -1,5 +1,5 @@
     var request = require('request');
-    require('dotenv').load();
+    //require('dotenv').load();
     var thread_settings= {
         greeting: function(greeting) {
             var message = {
