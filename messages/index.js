@@ -8,6 +8,7 @@ var request = require('request');
 var winston = require('winston');
  var path = require('path');
  var utilfunctions = require('./utilfunctions');
+ var getCars = require('./getcars');
 
 var filename = path.join(__dirname, 'somefile.log');
 
@@ -35,7 +36,6 @@ var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure
 
 var bot = new builder.UniversalBot(connector);
 
-const workspace_id = 'c8b97c89-ea70-4208-a868-05659609705e';
 var context = {};
 var conversation;
 
@@ -93,45 +93,45 @@ bot.dialog('/',[
             if(!conversation)
             {
                  conversation = watson.conversation({
-                    username: 'c725ffde-2e55-4de5-9b8e-d906a5e87690',
-                    password: '4pYI2ggJyeVP',
+                    username: process.env['CONVERSATION_USERNAME'],
+                    password: process.env['CONVERSATION_PASSWORD'],
                     version_date: '2016-09-20',
                     version: 'v1'
                 });
             }
              logger.log('info',"conversion object data",JSON.stringify(conversation));
             
-            
-            //var conversation = watson.conversation({
-            //    username: 'ade4d4aa-2f93-47e2-9435-2dd4ec9beb80',
-            //    password: 'GHHpOGwKN8Sw',
-             //   version_date: '2016-09-20',
-            //    version: 'v1'
-            //});
             if(typeof session.userData.context!='undefined'){
                 session.userData.context.layout = '';
                 session.userData.context.buttons = '';    
             }
+
+            //gettting data of cars according to category [in future this data will be fetched from database or other storage]
+            if(response.context.method=="getCars"){
+                response.context.buttons = getCars.getCarsByCategory(response.context.category);
+                response.context.method='';
+                response.context.category='';
+            }
+                
             
             logger.log('info', '----------conversation.message stagew----');
             logger.log('info', 'message text',session.message.text);
+
+            //IBM watson conversation api call
             conversation.message({
-                workspace_id:workspace_id,
+                workspace_id:process.env['WORKSPACE_ID'],
                 input:{'text':((typeof session.message.text!='undefined')?session.message.text:'')},
                 context:((typeof session.userData.context!='undefined' && session.userData.context!='' )?session.userData.context:{})
             },function(err, response){
+                // error response
                 if(err){
                     logger.log('info', '----------conversation err reply----');
                     logger.log('info','error message',JSON.stringify(err, null, 2));
-                    console.log(JSON.stringify(err));
-                    session.send("Hi ..cannot be started");
+                    session.send("Sorry bot chat has some issue.");
                 }
-                console.log("-----------------respose-------------");
-                console.log(response);
+
                 logger.log('info', '----------conversation reply----');
                 logger.log('info',"success data",JSON.stringify(response, null, 2));
-                //console.log(JSON.stringify(response, null, 2));
-                //session.send(response.output.text.join('\n'));
                 response.output.text.forEach(function(ele){
                      session.send(ele);
                 });
@@ -140,21 +140,44 @@ bot.dialog('/',[
                 {
                     console.log("layout==="+response.context.layout);
                     if(response.context.layout=='button'){
-                        session.beginDialog('/quickreplies',response);
+                        response.output.text.forEach(function(ele){
+                                session.send(ele);
+                        });
+                        session.beginDialog('/btnTemp',response);
                     }
                     else if(response.context.layout=='quick_replies'){
                         session.beginDialog('/quickreplies',response);
                     }
                     else if(response.context.layout=='generic'){
+                        response.output.text.forEach(function(ele){
+                                session.send(ele);
+                        });
                         session.beginDialog('/genericTemp',response);
                     }
+                    else if(response.context.layout=='Category Cars'){
+                        response.output.text.forEach(function(ele){
+                                session.send(ele);
+                        });
+                        session.beginDialog('/categorycarsTemp',response);
+                    }
+                    else if(response.context.layout=='text'){
+                        response.output.text.forEach(function(ele){
+                                session.send(ele);
+                        });
+                    }
                 }                               
-                session.userData.context = response.context;
+
+                //maintaing context of conversation
+                session.userData.context = response.context;  
                
             });
         }
     }
 ]);
+
+//************************************
+// Quick replies dialogue Template
+//************************************
 
 bot.dialog('/quickreplies',[
     function(session,args,next){
@@ -174,6 +197,10 @@ bot.dialog('/quickreplies',[
     },
    
 ]);
+
+//************************************
+// Button dialogue Template
+//************************************
 
 bot.dialog('/btnTemp',[
     function(session,args,next){
@@ -212,6 +239,10 @@ bot.dialog('/btnTemp',[
     },
    
 ]);
+
+//***********************************
+//Generic Template
+//*********************************
 bot.dialog('/genericTemp',[
     function(session,args,next){
         console.log(session);console.log("------button----------");
@@ -223,11 +254,11 @@ bot.dialog('/genericTemp',[
         {
            args.context.buttons.forEach(function(ele){
                var obj = new builder.HeroCard(session)
+                        .title(ele)
                         .images([
                             builder.CardImage.create(session, "https://botkit-facebook.mybluemix.net/images/"+ele.replace(/ +/g, "")+".jpg")
                         ])
                         .buttons([
-                            //builder.CardAction.openUrl(session, "https://en.wikipedia.org/wiki/Space_Needle", "Wikipedia"),
                             builder.CardAction.imBack(session, ele, ele)
                         ]);
                 attachmentArr.push(obj);
@@ -250,6 +281,50 @@ bot.dialog('/genericTemp',[
     
    
 ]);
+
+//*********************************************
+// Car category url template
+//*********************************************
+
+bot.dialog('/categorycarsTemp',[
+    function(session,args,next){
+        console.log("------categorycarsTemp----------");
+        console.log(args);
+        var carUrls = getCars.getCarUrls();
+      
+        var attachmentArr =[];
+        var choiceStr='';
+        if(typeof args.context.buttons!='undefined' && args.context.buttons!='')
+        {
+           args.context.buttons.forEach(function(ele){
+               var obj = new builder.HeroCard(session)
+                       .title(ele)
+                        .images([
+                            builder.CardImage.create(session, "https://botkit-facebook.mybluemix.net/images/"+ele.replace(/ +/g, "")+".jpg")
+                        ])
+                        .buttons([
+                            builder.CardAction.openUrl(session, carUrls[ele].explore, ele),
+                        ]);
+                attachmentArr.push(obj);
+                choiceStr+=ele+"|";
+               
+           }) ;
+           choiceStr=choiceStr.substr(0,(choiceStr.length-1));
+            
+        }
+        var msg = new builder.Message(session)
+            .attachmentLayout(builder.AttachmentLayout.carousel)
+            .attachments(attachmentArr);
+        builder.Prompts.choice(session, msg, choiceStr);
+    },
+    function (session, results) {
+        session.endDialog();
+        session.beginDialog('/');
+    }
+    
+   
+]);
+
 
 // bot.dialog('/', function (session) {
 //     session.send('You said ' + session.message.text);
