@@ -134,7 +134,7 @@ bot.dialog('/',[
                 logger.log('info', '----------conversation reply----');
                 logger.log('info',"success data",JSON.stringify(response, null, 2));
                 
-                if(response.context.method=="getCars"){
+                if(typeof response.context!='undefined' && response.context.method=="getCars"){
                     response.context.buttons = getCars.getCarsByCategory(response.context.category);
                     response.context.method='';
                     response.context.category='';
@@ -289,9 +289,9 @@ bot.dialog('/genericTemp',[
    
 ]);
 
-//*********************************************
-// Car category url template
-//*********************************************
+//***********************************************************************************
+// Generic template with buttons 'Specials , Build' and open url in new tab
+//***********************************************************************************
 
 bot.dialog('/categorycarsTemp',[
     function(session,args,next){
@@ -310,7 +310,8 @@ bot.dialog('/categorycarsTemp',[
                             builder.CardImage.create(session, "https://botkit-facebook.mybluemix.net/images/"+ele.replace(/ +/g, "")+".jpg")
                         ])
                         .buttons([
-                            builder.CardAction.openUrl(session, carUrls[ele].explore, ele),
+                            builder.CardAction.openUrl(session, carUrls[ele].explore, 'Specials'),
+                            builder.CardAction.openUrl(session, carUrls[ele].build, 'Build'),
                         ]);
                 attachmentArr.push(obj);
                 choiceStr+=ele+"|";
@@ -332,6 +333,54 @@ bot.dialog('/categorycarsTemp',[
     
    
 ]);
+
+//*****************************************************************************
+// generic template with two buttons 'Explore ,Build' and opens url in new tab
+//******************************************************************************
+
+bot.dialog('/genericcarsTemp',[
+    function(session,args,next){
+        console.log("------categorycarsTemp----------");
+        console.log(args);
+        var carUrls = getCars.getCarUrls();
+      
+        var attachmentArr =[];
+        var choiceStr='';
+        if(typeof args.context.buttons!='undefined' && args.context.buttons!='')
+        {
+           args.context.buttons.forEach(function(ele){
+               var obj = new builder.HeroCard(session)
+                       .title(ele)
+                        .images([
+                            builder.CardImage.create(session, "https://botkit-facebook.mybluemix.net/images/"+ele.replace(/ +/g, "")+".jpg")
+                        ])
+                        .buttons([
+                            builder.CardAction.openUrl(session, carUrls[ele].explore, 'Explore'),
+                            builder.CardAction.openUrl(session, carUrls[ele].build, 'Build'),
+                        ]);
+                attachmentArr.push(obj);
+                choiceStr+=ele+"|";
+               
+           }) ;
+           choiceStr=choiceStr.substr(0,(choiceStr.length-1));
+            
+        }
+        var msg = new builder.Message(session)
+            .attachmentLayout(builder.AttachmentLayout.carousel)
+            .attachments(attachmentArr);
+        builder.Prompts.choice(session, msg, choiceStr);
+        session.endDialog();
+        
+    }/*,
+    function (session, results) {
+        
+        session.endDialog();
+        session.beginDialog('/');
+    }*/
+    
+   
+]);
+
 
 
 // bot.dialog('/', function (session) {
