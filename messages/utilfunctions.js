@@ -1,11 +1,5 @@
     var request = require('request');
-    var winston = require('winston');
-    require('dotenv').load();
-    var logger = new (winston.Logger)({
-    transports: [
-        new (winston.transports.File)({ filename: filename })
-    ]
-  });
+    
     //require('dotenv').load();
     var thread_settings= {
         greeting: function(greeting) {
