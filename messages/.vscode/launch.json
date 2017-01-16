@@ -10,7 +10,7 @@
             "cwd": "${workspaceRoot}",
             "env": {
                 "NODE_ENV": "development",
-                "FB_ACCESS_TOKEN":"EAACZCubvsNZCEBABwMqOMtSHZCuoY4DvZCLw9oJFP6R1zVvH4ExfxSF0XBJbH9JSQlJRsKdM2aRMR1QexN88HzjIKdvMWrILn6ZCaESKh0kLYSwhpUBwOLp81YIcYXz87rdBry28xIstVay58GPj492t6YHW3j2hMEGaC00AEdQZDZD",
+                "FB_ACCESS_TOKEN":"EAAFUt7ENO4YBAARWorOI7Mh8J38eLy1pw7htDPxCzptekK25x538HAzCXgoU8H79Vue8xqXtfyhsHZBCvf0KtYvidiRNJAYBYkEjscfKDDIB6jrcmgnpCv2VLMZALe7bq9PYL09YCxAwX9uVPiUX98dsZB3Porubr9aZC0ri1wZDZD",
                 "CONVERSATION_USERNAME":"c725ffde-2e55-4de5-9b8e-d906a5e87690",
                 "CONVERSATION_PASSWORD": "4pYI2ggJyeVP",
                 "WORKSPACE_ID" :"c8b97c89-ea70-4208-a868-05659609705e"
