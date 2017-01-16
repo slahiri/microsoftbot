@@ -112,11 +112,7 @@ bot.dialog('/',[
             }
 
             //gettting data of cars according to category [in future this data will be fetched from database or other storage]
-            if(response.context.method=="getCars"){
-                response.context.buttons = getCars.getCarsByCategory(response.context.category);
-                response.context.method='';
-                response.context.category='';
-            }
+            
                 
             
             logger.log('info', '----------conversation.message stagew----');
@@ -137,9 +133,12 @@ bot.dialog('/',[
 
                 logger.log('info', '----------conversation reply----');
                 logger.log('info',"success data",JSON.stringify(response, null, 2));
-                response.output.text.forEach(function(ele){
-                     session.send(ele);
-                });
+                
+                if(response.context.method=="getCars"){
+                    response.context.buttons = getCars.getCarsByCategory(response.context.category);
+                    response.context.method='';
+                    response.context.category='';
+                }
                 
                 if(typeof response.context.layout!='undefined' && response.context.layout!='')
                 {
