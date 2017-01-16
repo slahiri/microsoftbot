@@ -184,12 +184,13 @@ bot.dialog('/quickreplies',[
         console.log(session);console.log("------quickreplies----------");
         console.log(args);
         builder.Prompts.choice(session,"Select options",args.context.buttons);
+        session.endDialog();
        
     },
     function (session, result) {
         if(result.response)
         {
-             session.endDialog();
+            session.endDialog();
             session.beginDialog('/');
         }
         
@@ -225,9 +226,10 @@ bot.dialog('/btnTemp',[
              var msg = new builder.Message(session)
             .attachments([msgAttachment]);
             builder.Prompts.choice(session, msg, choiceStr);
+            session.endDialog();
         }      
        
-    },
+    }/*,
     function (session, result) {
         if(result.response)
         {
@@ -236,7 +238,7 @@ bot.dialog('/btnTemp',[
         }
         
         
-    },
+    },*/
    
 ]);
 
@@ -272,12 +274,13 @@ bot.dialog('/genericTemp',[
             .attachmentLayout(builder.AttachmentLayout.carousel)
             .attachments(attachmentArr);
         builder.Prompts.choice(session, msg, choiceStr);
-    },
+        session.endDialog();
+    }/*,
     function (session, results) {
         
          session.endDialog();
         session.beginDialog('/');
-    }
+    }*/
     
    
 ]);
@@ -316,11 +319,12 @@ bot.dialog('/categorycarsTemp',[
             .attachmentLayout(builder.AttachmentLayout.carousel)
             .attachments(attachmentArr);
         builder.Prompts.choice(session, msg, choiceStr);
-    },
+        session.endDialog();
+    }/*,
     function (session, results) {
         session.endDialog();
         session.beginDialog('/');
-    }
+    }*/
     
    
 ]);
