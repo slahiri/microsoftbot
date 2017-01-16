@@ -1,7 +1,5 @@
 "use strict";
 
-//require('dotenv').load();
-//var commondata = require('dotenv').load();
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 var watson = require('watson-developer-cloud');
@@ -25,10 +23,10 @@ console.log()
 var useEmulator = (process.env.NODE_ENV == 'development');
 logger.log('info',"data", JSON.stringify(process.env));
 
-logger.log('info',"username", JSON.stringify(process.env['CONVERSATION_USERNAME']));
-logger.log('info',"password", JSON.stringify(process.env['CONVERSATION_PASSWORD']));
-logger.log('info',"acesstoken", JSON.stringify(process.env['FB_ACCESS_TOKEN']));
-logger.log('info',"spaceod", JSON.stringify(process.env['WORKSPACE_ID']));
+logger.log('info',"username", process.env['CONVERSATION_USERNAME']);
+logger.log('info',"password", process.env['CONVERSATION_PASSWORD']);
+logger.log('info',"acesstoken",process.env['FB_ACCESS_TOKEN']);
+logger.log('info',"spaceod", process.env['WORKSPACE_ID']);
 logger.log('info', 'appId',process.env['MicrosoftAppId']);
 logger.log('info', 'appPassword',process.env['MicrosoftAppPassword']);
 logger.log('info', 'stateEndpoint',process.env['BotStateEndpoint']);

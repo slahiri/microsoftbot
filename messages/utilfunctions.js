@@ -1,5 +1,5 @@
     var request = require('request');
-    
+
     //require('dotenv').load();
     var thread_settings= {
         greeting: function(greeting) {
@@ -33,7 +33,7 @@
             thread_settings.postAPI(message);
         },
         postAPI: function(message) {
-            request.post('https://graph.facebook.com/v2.6/me/thread_settings?access_token=' + process.env.FB_ACCESS_TOKEN,
+            request.post('https://graph.facebook.com/v2.6/me/thread_settings?access_token=' + process.env['FB_ACCESS_TOKEN'],
                 {form: message},
                 function(err, res, body) {
                     if (err) {
