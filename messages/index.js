@@ -264,7 +264,7 @@ bot.dialog('/genericTemp',[
                var obj = new builder.HeroCard(session)
                         .title('-')
                         .images([
-                            builder.CardImage.create(session, "https://botkit-facebook.mybluemix.net/images/"+ele.replace(/ +/g, "")+".jpg")
+                            builder.CardImage.create(session, "https://testfbbotue4agf.blob.core.windows.net/images/"+ele.replace(/ +/g, "")+".jpg")
                         ])
                         .buttons([
                             builder.CardAction.imBack(session, ele, ele)
@@ -309,7 +309,7 @@ bot.dialog('/categorycarsTemp',[
                var obj = new builder.HeroCard(session)
                        .title(ele)
                         .images([
-                            builder.CardImage.create(session, "https://botkit-facebook.mybluemix.net/images/"+ele.replace(/ +/g, "")+".jpg")
+                            builder.CardImage.create(session, "https://testfbbotue4agf.blob.core.windows.net/images/"+ele.replace(/ +/g, "")+".jpg")
                         ])
                         .buttons([
                             builder.CardAction.openUrl(session, carUrls[ele].explore, 'Specials'),
@@ -354,7 +354,7 @@ bot.dialog('/genericcarsTemp',[
                var obj = new builder.HeroCard(session)
                        .title(ele)
                         .images([
-                            builder.CardImage.create(session, "https://botkit-facebook.mybluemix.net/images/"+ele.replace(/ +/g, "")+".jpg")
+                            builder.CardImage.create(session, "https://testfbbotue4agf.blob.core.windows.net/images/"+ele.replace(/ +/g, "")+".jpg")
                         ])
                         .buttons([
                             builder.CardAction.openUrl(session, carUrls[ele].explore, 'Explore'),
