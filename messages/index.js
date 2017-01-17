@@ -111,7 +111,6 @@ bot.dialog('/',[
                 session.userData.context.buttons = '';    
             }
 
-            //gettting data of cars according to category [in future this data will be fetched from database or other storage]
             
                 
             
@@ -134,6 +133,9 @@ bot.dialog('/',[
                 logger.log('info', '----------conversation reply----');
                 logger.log('info',"success data",JSON.stringify(response, null, 2));
                 
+
+                //gettting data of cars according to category [in future this data will be fetched from database or other storage]
+            
                 if(typeof response.context!='undefined' && response.context.method=="getCars"){
                     response.context.buttons = getCars.getCarsByCategory(response.context.category);
                     response.context.method='';
@@ -260,7 +262,7 @@ bot.dialog('/genericTemp',[
         {
            args.context.buttons.forEach(function(ele){
                var obj = new builder.HeroCard(session)
-                        .title(ele)
+                        .title('-')
                         .images([
                             builder.CardImage.create(session, "https://botkit-facebook.mybluemix.net/images/"+ele.replace(/ +/g, "")+".jpg")
                         ])
