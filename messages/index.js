@@ -89,6 +89,7 @@ bot.on('conversationUpdate', function (message) {
 
 bot.on('contactRelationUpdate', function (message) {
     console.log("---------conversation conversationUpdate---------");
+    logger.log('info',"conversation conversationUpdate");
     console.log(message);
 });
 bot.on('receive', function (message) {
