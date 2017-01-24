@@ -95,7 +95,7 @@ bot.on('receive', function (message) {
     console.log("---------receive---------");
     logger.log('info',"Receive event fired");
     logger.log('info',"Receive message",JSON.stringify(message));
-    if(typeof message.type!=='undefined'){
+    if(typeof message.type!=='undefined' && message.type==='message'){
         logger.log('info',"Receive event fired");
         logger.log('info',"Receive event fired @ ",JSON.stringify(new Date().getTime()));
     }
@@ -106,7 +106,7 @@ bot.on('send', function (message) {
     logger.log('info',"Send event fired");
     logger.log('info',"Send message",JSON.stringify(message));
     console.log(message);
-    if(typeof message.type!=='undefined'){
+    if(typeof message.type!=='undefined' && message.type==="message"){
         logger.log('info',"Send event fired");
         logger.log('info',"send event fired @ ",JSON.stringify(new Date().getTime()));
     }
