@@ -1,19 +1,8 @@
     var request = require('request');
-    var winston = require('winston');
-    var path = require('path');
-    var filename = path.join(__dirname, 'somefile.log');
-
-var logger = new (winston.Logger)({
-    transports: [
-        new (winston.transports.File)({ filename: filename })
-    ]
-  });
-
-
-
-
+    
     //require('dotenv').load();
     var thread_settings= {
+         
         greeting: function(greeting) {
             var message = {
                 'setting_type': 'greeting',
@@ -24,7 +13,6 @@ var logger = new (winston.Logger)({
             thread_settings.postAPI(message);
         },
         get_started: function(payload) {
-            logger.log('info', 'GET STARTED');
             var message = {
                 'setting_type': 'call_to_actions',
                 'thread_state': 'new_thread',
@@ -35,7 +23,7 @@ var logger = new (winston.Logger)({
                         }
                     ]
             };
-            logger.log('info', 'GET STARTED', JSON.stringify(message));
+            
             thread_settings.postAPI(message);
         },
          menu: function(payload) {
