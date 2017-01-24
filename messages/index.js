@@ -1,12 +1,16 @@
 "use strict";
 
-var builder = require("botbuilder");
+//var builder = require("botbuilder");
+global.builder = require('botbuilder');
+global.lodash = require('lodash');
 var botbuilder_azure = require("botbuilder-azure");
 var request = require('request');
 var winston = require('winston');
 var path = require('path');
 var utilfunctions = require('./utilfunctions');
 var getCars = require('./getcars');
+var template = require('./templates');
+var data = require("./data.json");
 
 var filename = path.join(__dirname, 'somefile.log');
 
@@ -22,8 +26,7 @@ console.log()
 var useEmulator = (process.env.NODE_ENV == 'development');
 logger.log('info',"data", JSON.stringify(process.env));
 
-global.builder = require('botbuilder');
-global.lodash = require('lodash');
+
 
 
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
