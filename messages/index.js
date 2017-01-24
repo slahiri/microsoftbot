@@ -21,10 +21,10 @@ var logger = new (winston.Logger)({
   });
 
 logger.log('info', 'check if file is working or not');
-console.log()
+
 
 var useEmulator = (process.env.NODE_ENV == 'development');
-logger.log('info',"data", JSON.stringify(process.env));
+//slogger.log('info',"data", JSON.stringify(process.env));
 
 
 
@@ -72,6 +72,45 @@ utilfunctions.facebook_thread_setting.menu([{
 
 bot.endConversationAction('goodbye', 'Goodbye :)', { matches: /^goodbye/i });
 bot.beginDialogAction('help', '/help', { matches: /^help/i });
+
+
+//==========================================================
+//Bot events
+//==========================================================
+
+
+//sending greetings mesage when bot is added to convrsation
+bot.on('conversationUpdate', function (message) {
+    console.log("---------Bot is first added to conversation---------");
+    logger.log('info',"Bot is first added to conversation");
+    
+
+});
+
+bot.on('contactRelationUpdate', function (message) {
+    console.log("---------conversation conversationUpdate---------");
+    console.log(message);
+});
+bot.on('receive', function (message) {
+    console.log("---------receive---------");
+    logger.log('info',"Receive event fired");
+    logger.log('info',"Receive message",JSON.stringify(message));
+    if(typeof message.type!=='undefined'){
+        logger.log('info',"Receive event fired");
+        logger.log('info',"Receive event fired @ ",JSON.stringify(new Date().getTime()));
+    }
+    console.log(message);
+});
+bot.on('send', function (message) {
+    console.log("---------send---------");
+    logger.log('info',"Send event fired");
+    logger.log('info',"Send message",JSON.stringify(message));
+    console.log(message);
+    if(typeof message.type!=='undefined'){
+        logger.log('info',"Send event fired");
+        logger.log('info',"send event fired @ ",JSON.stringify(new Date().getTime()));
+    }
+});
 
 //=========================================================
 // Bots Dialogs
