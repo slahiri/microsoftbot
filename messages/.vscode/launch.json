@@ -13,7 +13,8 @@
                 "FB_ACCESS_TOKEN":"EAAFUt7ENO4YBAARWorOI7Mh8J38eLy1pw7htDPxCzptekK25x538HAzCXgoU8H79Vue8xqXtfyhsHZBCvf0KtYvidiRNJAYBYkEjscfKDDIB6jrcmgnpCv2VLMZALe7bq9PYL09YCxAwX9uVPiUX98dsZB3Porubr9aZC0ri1wZDZD",
                 "CONVERSATION_USERNAME":"c725ffde-2e55-4de5-9b8e-d906a5e87690",
                 "CONVERSATION_PASSWORD": "4pYI2ggJyeVP",
-                "WORKSPACE_ID" :"c8b97c89-ea70-4208-a868-05659609705e"
+                "WORKSPACE_ID" :"c8b97c89-ea70-4208-a868-05659609705e",
+                "LuisModelUrl" :"https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/de69bc89-856d-446b-85ac-03adb848a2a4?subscription-key=1a1df6e10ac446d5b596d993bca258ae&verbose=true"
 
             }
         }

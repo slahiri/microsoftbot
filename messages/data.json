@@ -1,0 +1,8 @@
+{
+	"mainCategory":{ "button":["Off to Work","Out with Family","On an Adventure"]},
+	"off_to_work" :{"button":["Commuting to work", "Getting work done"]},
+	"commute_to_work" :{"button":["Going to the office","Going to school"]},
+	"going_to_the_office":{"button":["Being Comfortable","Being Efficient","Being Economical"]},
+	"being_comfortable":{"button":["2017 Highlander","2017 Avalon Hybrid"]}
+
+}
