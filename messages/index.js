@@ -164,6 +164,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
                 .attachments([msgAttachment]);
 
             session.send(msg);
+                  session.sendBatch();
             session.endDialog();
 
         }
@@ -179,6 +180,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
             .attachments(lodash.invokeMap(data['mainCategory']['button'],template.genericTemplate,session));
 
             session.send(msg);
+                  session.sendBatch();
             session.endDialog();
         }
     ])
@@ -186,6 +188,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
         function (session,args,next) {
             session.send("Sounds good! Check back when you're ready to dive in.");
             session.send("Cool. Chat with you soon");
+                  session.sendBatch();
             session.endDialog();
         }
     ])
