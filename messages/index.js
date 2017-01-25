@@ -24,7 +24,7 @@ logger.log('info', 'check if file is working or not');
 
 
 //a middleware to check the overall request and response time difference including network latency and node modules etc.
-var middle_func=function(req, res, next ){
+/*var middle_func=function(req, res, next ){
     var startTime = process.hrtime();
     var end = res.end;
     var ended = false;
@@ -42,7 +42,7 @@ var middle_func=function(req, res, next ){
         logger.log('info', 'Performance time for sending response including node processing time and luis call time %d ms',responseTime);
     };
     next();
-});
+});*/
 
 
 var useEmulator = (process.env.NODE_ENV == 'development');
@@ -115,6 +115,9 @@ bot.on('contactRelationUpdate', function (message) {
     console.log(message);
 });
 bot.on('receive', function (message) {
+    if(global.startTimeLuis >0){global.startTimeLuis=0;}
+     global.startTimeLuis = process.hrtime();
+    
     console.log("---------receive---------");
     logger.log('info',"Receive event fired");
     logger.log('info',"Receive message",JSON.stringify(message));
@@ -128,6 +131,11 @@ bot.on('send', function (message) {
     console.log("---------send---------");
     logger.log('info',"Send event fired");
     logger.log('info',"Send message",JSON.stringify(message));
+    var diff = process.hrtime(global.startTimeLuis );
+    var luisResponseTime = (diff[0] * 1e9 + diff[1]) / 1e6;
+    logger.log('info',"Response time from Luis including network latency is %d ms",luisResponseTime);
+    
+
     console.log(message);
     if(typeof message.type!=='undefined' && message.type==="message"){
         logger.log('info',"Send event fired");
@@ -250,5 +258,5 @@ if (useEmulator) {
     });
     server.post('/api/messages', connector.listen());    
 } else {
-    module.exports = { default:  [middle_func(),connector.listen()]}
+    module.exports = { default:  connector.listen()}
 }
