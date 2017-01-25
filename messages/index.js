@@ -133,7 +133,7 @@ bot.on('send', function (message) {
     logger.log('info',"Send message",JSON.stringify(message));
     var diff = process.hrtime(global.startTimeLuis );
     var luisResponseTime = (diff[0] * 1e9 + diff[1]) / 1e6;
-    logger.log('info',"Response time from Luis including network latency is %d ms",luisResponseTime);
+    logger.log('info',"Response time from Luis including network latency is %d ms %s",luisResponseTime,mesage.type);
     
 
     console.log(message);
