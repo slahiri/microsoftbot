@@ -134,7 +134,7 @@ bot.on('send', function (message) {
     logger.log('info',"Send message",JSON.stringify(message));
     var diff = process.hrtime(global.startTimeLuis );
     var luisResponseTime = (diff[0] * 1e9 + diff[1]) / 1e6;
-    logger.log('info',"Response time from Luis including network latency is %d ms %s",diff[0],message.type);
+    logger.log('info',"Response time from Luis including network latency is %d s %s",diff[0],message.type);
     
 
     console.log(message);
@@ -155,7 +155,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     .matches('Greeting',[
         function(session,args,next){
             session.send('Hello');
-            session.endDialog();
+            //session.endDialog();
 
             var btArr = ['Yes','May be later'];
             var title = "I'm here to help you find your perfect Toyota. Ready to get started?"
@@ -163,7 +163,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
             var msg = new builder.Message(session)
                 .attachments([msgAttachment]);
 
-            //session.send(msg);
+            session.send(msg);
             session.endDialog();
 
         }
@@ -171,21 +171,21 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     .matches('Yes',[
         function(session,args,next){
             session.send("We'll start with an easy one.");
-            session.endDialog();
-            //session.send("Where are you headed?");
+           //session.endDialog();
+            /ession.send("Where are you headed?");
 
             var msg = new builder.Message(session)
             .attachmentLayout(builder.AttachmentLayout.carousel)
             .attachments(lodash.invokeMap(data['mainCategory']['button'],template.genericTemplate,session));
 
-            //session.send(msg);
-            //session.endDialog();
+            session.send(msg);
+            session.endDialog();
         }
     ])
     .matches('may_be_later',[
         function (session,args,next) {
             session.send("Sounds good! Check back when you're ready to dive in.");
-            //session.send("Cool. Chat with you soon");
+            session.send("Cool. Chat with you soon");
             session.endDialog();
         }
     ])
