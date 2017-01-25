@@ -199,6 +199,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
             .attachments(lodash.invokeMap(data['off_to_work']['button'],template.genericTemplate,session));
 
             session.send(msg);
+            session.sendBatch();
             session.endDialog();
 
         }
