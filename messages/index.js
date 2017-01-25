@@ -170,9 +170,9 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     ])
     .matches('Yes',[
         function(session,args,next){
-            session.send("We'll start with an easy one.");
+            //session.send("We'll start with an easy one.");
            //session.endDialog();
-            session.send("Where are you headed?");
+            //session.send("Where are you headed?");
 
             var msg = new builder.Message(session)
             .attachmentLayout(builder.AttachmentLayout.carousel)
@@ -185,14 +185,14 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     .matches('may_be_later',[
         function (session,args,next) {
             session.send("Sounds good! Check back when you're ready to dive in.");
-            session.send("Cool. Chat with you soon");
+            //session.send("Cool. Chat with you soon");
             session.endDialog();
         }
     ])
     .matches('off_to_work',[
         function(session,args,next){
-            session.send("Ok, time to find a way to get you there!");
-            session.send("How do you plan to use your vehicle?");
+            //session.send("Ok, time to find a way to get you there!");
+            //session.send("How do you plan to use your vehicle?");
 
             var msg = new builder.Message(session)
             .attachmentLayout(builder.AttachmentLayout.carousel)
@@ -206,8 +206,8 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     ])
     .matches('commuting_to_work',[
         function(session,args,next){
-            session.send("Let's make it an enjoyable drive.");
-            session.send("Where are you headed every day?");
+            //session.send("Let's make it an enjoyable drive.");
+            //session.send("Where are you headed every day?");
 
             var msg = new builder.Message(session)
             .attachmentLayout(builder.AttachmentLayout.carousel)
