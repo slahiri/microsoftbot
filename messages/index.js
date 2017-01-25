@@ -24,7 +24,7 @@ logger.log('info', 'check if file is working or not');
 
 
 //a middleware to check the overall request and response time difference including network latency and node modules etc.
-/*var middle_func=function(req, res, next ){
+var middle_func=function(req, res, next ){
     var startTime = process.hrtime();
     var end = res.end;
     var ended = false;
@@ -41,8 +41,9 @@ logger.log('info', 'check if file is working or not');
         console.log('Performance time for sending response including node processing time and luis call time %d ms', responseTime);
         logger.log('info', 'Performance time for sending response including node processing time and luis call time %d ms',responseTime);
     };
-    next();
-});*/
+    var c = connector.listen();
+    c(req,res);
+});
 
 
 var useEmulator = (process.env.NODE_ENV == 'development');
@@ -258,5 +259,5 @@ if (useEmulator) {
     });
     server.post('/api/messages', connector.listen());    
 } else {
-    module.exports = { default:  connector.listen()}
+    module.exports = { default:  middle_func()}
 }
