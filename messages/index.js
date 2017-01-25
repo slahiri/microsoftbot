@@ -41,7 +41,7 @@ var middle_func=function(req, res, next ){
         console.log('Performance time for sending response including node processing time and luis call time %d ms', responseTime);
         logger.log('info', 'Performance time for sending response including node processing time and luis call time %d ms',responseTime);
     };
-    connector.listen()
+    next();
 });
 
 
@@ -250,5 +250,5 @@ if (useEmulator) {
     });
     server.post('/api/messages', connector.listen());    
 } else {
-    module.exports = { default:  middle_func()}
+    module.exports = { default:  [middle_func(),connector.listen()]}
 }
