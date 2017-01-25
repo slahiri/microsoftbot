@@ -154,7 +154,7 @@ var recognizer = new builder.LuisRecognizer(process.env.LuisModelUrl);
 var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     .matches('Greeting',[
         function(session,args,next){
-            session.send('Hello');
+            //session.send('Hello');
             //session.endDialog();
 
             var btArr = ['Yes','May be later'];
