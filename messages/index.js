@@ -23,6 +23,28 @@ var logger = new (winston.Logger)({
 logger.log('info', 'check if file is working or not');
 
 
+//a middleware to check the overall request and response time difference including network latency and node modules etc.
+var middle_func=function(req, res, next ){
+    var startTime = process.hrtime();
+    var end = res.end;
+    var ended = false;
+
+    res.end = function(chunk, encoding) {
+        if(ended) {
+            return;
+        }
+        ended = true;
+        end.call(this, chunk, encoding);
+
+        var diff = process.hrtime(startTime);
+        var responseTime = (diff[0] * 1e9 + diff[1]) / 1e6;
+        console.log('Performance time for sending response including node processing time and luis call time %d ms', responseTime);
+        logger.log('info', 'Performance time for sending response including node processing time and luis call time %d ms',responseTime);
+    };
+    connector.listen()
+});
+
+
 var useEmulator = (process.env.NODE_ENV == 'development');
 //slogger.log('info',"data", JSON.stringify(process.env));
 
@@ -228,5 +250,5 @@ if (useEmulator) {
     });
     server.post('/api/messages', connector.listen());    
 } else {
-    module.exports = { default: connector.listen() }
+    module.exports = { default:  middle_func()}
 }
