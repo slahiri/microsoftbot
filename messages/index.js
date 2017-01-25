@@ -172,7 +172,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
         function(session,args,next){
             session.send("We'll start with an easy one.");
            //session.endDialog();
-            /ession.send("Where are you headed?");
+            session.send("Where are you headed?");
 
             var msg = new builder.Message(session)
             .attachmentLayout(builder.AttachmentLayout.carousel)
@@ -199,7 +199,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
             .attachments(lodash.invokeMap(data['off_to_work']['button'],template.genericTemplate,session));
 
             session.send(msg);
-            
+
             session.endDialog();
 
         }
