@@ -67,6 +67,7 @@ var conversation;
 bot.use(builder.Middleware.dialogVersion({ version: 1.0, resetCommand: /^reset/i }));
 // bot.use(builder.Middleware.firstRun({version: 1.0, dialogId: '*:/firstRun' }));
 bot.use(builder.Middleware.sendTyping());
+bot.set("autoBatchDelay",0);
 
 
 //========================================
