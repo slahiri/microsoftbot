@@ -1,4 +1,5 @@
 "use strict";
+require('newrelic');
 
 //var builder = require("botbuilder");
 global.builder = require('botbuilder');
