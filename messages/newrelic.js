@@ -10,11 +10,11 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ['My Application'],
+  app_name: ['FindYourCarSapeDev01'],
   /**
    * Your New Relic license key.
    */
-  license_key: 'license key here',
+  license_key: 'ed59a7b8214a7be33586d97d9e5c283536e4d148',
   logging: {
     /**
      * Level at which to log. 'trace' is most useful to New Relic when diagnosing
